@@ -1,5 +1,5 @@
 import "../styles/movie-card.css";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 export default function MovieCard() {
   return (
     <>
@@ -8,8 +8,10 @@ export default function MovieCard() {
           <img src="src\assets\scarface-friend-2__27832.jpg" />
         </div>
         <div className="rating">
-          <StarBorderIcon sx={{ color: "yellow" }}></StarBorderIcon>
-          <p className="description">9.5</p>
+          <StarIcon sx={{ color: "yellow" }}></StarIcon>
+          <p className="description">
+            <strong className="text-lg">9.5</strong>
+          </p>
         </div>
         <div className="description-container">
           <h3>
@@ -21,6 +23,9 @@ export default function MovieCard() {
           <p className="description">
             <strong>Genre: </strong>Action
           </p>
+        </div>
+        <div className="button-container">
+          <button>More info...</button>
         </div>
       </div>
     </>
