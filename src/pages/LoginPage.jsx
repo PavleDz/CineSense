@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { Paper, Typography } from "@mui/material";
 import LoginForm from "../components/auth/LoginForm";
 import ForgotPassword from "../components/auth/ForgotPassword";
@@ -14,15 +15,15 @@ const LoginPage = () => {
   const [resetEmail, setResetEmail] = useState("");
 
   // login handler
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async (event) => {
+    event.preventDefault();
     try {
       const { data } = await axios.post("...", {
         email,
         password,
       });
 
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token); // JWT
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -60,7 +61,7 @@ const LoginPage = () => {
   return (
     <div className="flex h-screen justify-center items-center bg-gray-100">
       <Paper elevation={4} className="p-8 w-full max-w-md">
-        <Typography variant="h4" className="mb-6 text-center font-bold">
+        <Typography variant="h4" className="pb-4 text-center font-bold">
           Sign in to your account
         </Typography>
 
