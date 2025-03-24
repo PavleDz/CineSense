@@ -1,6 +1,8 @@
 import "../styles/movie-card.css";
 import StarIcon from "@mui/icons-material/Star";
-export default function MovieCard() {
+export default function MovieCard({ movie }) {
+  console.log("load");
+
   return (
     <>
       <div className="movie-container">
@@ -10,22 +12,23 @@ export default function MovieCard() {
         <div className="rating">
           <StarIcon sx={{ color: "yellow" }}></StarIcon>
           <p className="description">
-            <strong className="text-lg">9.5</strong>
+            <strong className="text-lg">{movie.rating}</strong>
           </p>
         </div>
         <div className="description-container">
           <h3>
-            <strong>The Scarface</strong>
+            <strong>{movie.title}</strong>
           </h3>
           <p className="description">
-            <strong>Year:</strong> 1987
+            <strong>Year:</strong> {movie.year}
           </p>
           <p className="description">
-            <strong>Genre: </strong>Action
+            <strong>Genre: </strong>
+            {movie.genre}
           </p>
         </div>
         <div className="button-container">
-          <button>More info...</button>
+          <button className="more-info-button">More info...</button>
         </div>
       </div>
     </>
