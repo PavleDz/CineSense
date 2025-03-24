@@ -17,7 +17,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/login", {
+      const { data } = await axios.post("...", {
         email,
         password,
       });
@@ -41,7 +41,7 @@ const LoginPage = () => {
   // handle reset password
   const handleResetPassword = async () => {
     try {
-      const { data } = await axios.post("/api/forgot-password", {
+      const { data } = await axios.post("...", {
         email: resetEmail,
       });
 
