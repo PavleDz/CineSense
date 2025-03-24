@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import MovieCard from "./movie-card";
 import "../styles/top-rated.css";
-
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 export default function TopRated() {
   const movies = [
     { id: 1, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
@@ -16,16 +17,26 @@ export default function TopRated() {
     { id: 10, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
     { id: 11, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
     { id: 12, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
+    { id: 13, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
   ];
 
   const [displayedMovies, setDisplayedMovies] = useState(movies.slice(0, 6));
-
+  const [buttonState, setButtonState] = useState(true);
   const handleLoadMore = () => {
     const nextMovies = movies.slice(
       displayedMovies.length,
       displayedMovies.length + 3
     );
+    if (displayedMovies.length + 3 >= movies.length) {
+      setButtonState(false);
+    }
     setDisplayedMovies((prevMovies) => [...prevMovies, ...nextMovies]);
+  };
+
+  const handleHideAll = () => {
+    const initMovies = movies.slice(0, 6);
+    setDisplayedMovies(initMovies);
+    setButtonState(true);
   };
 
   return (
@@ -36,9 +47,15 @@ export default function TopRated() {
         ))}
       </div>
       <div className="button-container">
-        <button className="load-more-button" onClick={handleLoadMore}>
-          LOAD MORE
-        </button>
+        {buttonState ? (
+          <button className="load-more-button" onClick={handleLoadMore}>
+            LOAD MORE <ArrowDropDownIcon></ArrowDropDownIcon>
+          </button>
+        ) : (
+          <button className="load-more-button" onClick={handleHideAll}>
+            HIDE ALL <ArrowDropUpIcon></ArrowDropUpIcon>
+          </button>
+        )}
       </div>
     </>
   );
