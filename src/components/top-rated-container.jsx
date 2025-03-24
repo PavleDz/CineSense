@@ -3,7 +3,7 @@ import MovieCard from "./top-movie-card";
 import "../styles/top-rated-container.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-export default function TopRated() {
+export default function TopRatedContainer() {
   const movies = [
     { id: 1, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
     { id: 2, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
