@@ -22,7 +22,7 @@ const RegisterPage = () => {
     }
 
     try {
-      // request on backend
+      // request na backend
       const response = await axios.post("...", {
         firstName,
         lastName,
@@ -32,10 +32,10 @@ const RegisterPage = () => {
 
       // Success handler
       alert(response.data.message || "Registration successful!");
-      // 4) redirect na login ako je success
+      // redirect na login ako je success
       // navigate("/login");
     } catch (error) {
-      // 5) error
+      // error
       if (error.response) {
         alert(error.response.data.message);
       } else {

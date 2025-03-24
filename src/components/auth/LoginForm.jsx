@@ -36,7 +36,7 @@ const LoginForm = ({
         required
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        InputProps={{
+        SlotProps={{
           endAdornment: (
             <InputAdornment position="end">
               <IconButton onClick={() => setShowPassword((prev) => !prev)}>
