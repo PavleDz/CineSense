@@ -1,4 +1,4 @@
-import "../styles/movie-card.css";
+import "../styles/top-movie-card.css";
 import StarIcon from "@mui/icons-material/Star";
 
 export default function MovieCard({ movie }) {
