@@ -1,2 +1,2 @@
 # CineSense
-Coins - Web Aplikacija - CineSense
+Coinis course project
