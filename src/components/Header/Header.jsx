@@ -5,12 +5,14 @@ import Container from "@mui/material/Container";
 import LogoSection from "./LogoSection";
 import NavigationSection from "./NavigationSection";
 import ProfileSection from "./ProfileSection";
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar>
+          <MobileMenu />
           <LogoSection />
           <NavigationSection />
           <ProfileSection />
