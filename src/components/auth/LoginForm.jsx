@@ -1,21 +1,25 @@
-import { useState } from "react";
-import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import {
+  TextField,
+  Button,
+  InputAdornment,
+  IconButton,
+  Link,
+  Typography,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import AuthForm from "./AuthForm";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Logging in:", email, password);
-    // login logic
-  };
-
+const LoginForm = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  showPassword,
+  setShowPassword,
+  handleLogin,
+  handleForgotPassword,
+}) => {
   return (
-    <AuthForm title="Sign in to your account" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-4" onSubmit={handleLogin}>
       <TextField
         label="Email"
         variant="outlined"
@@ -24,6 +28,7 @@ const Login = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+
       <TextField
         label="Password"
         variant="outlined"
@@ -41,16 +46,22 @@ const Login = () => {
           ),
         }}
       />
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        className="mt-4"
-      >
+
+      <Button type="submit" variant="contained" color="primary">
         Login
       </Button>
-    </AuthForm>
+
+      <Typography variant="body2" className="mt-2 text-center">
+        <Link href="#" onClick={handleForgotPassword}>
+          Forgot password?
+        </Link>
+      </Typography>
+
+      <Typography variant="body2" className="mt-2 text-center">
+        Don&apos;t have an account? <Link href="/register">Register</Link>
+      </Typography>
+    </form>
   );
 };
 
-export default Login;
+export default LoginForm;
