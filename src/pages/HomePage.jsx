@@ -1,5 +1,5 @@
 import "../styles/HomePage.css";
-import MovieSlider from "C:/Users/andri/Coinis Project/CineSense-1/src/components/MovieSlider.jsx";
+import MovieSlider from "../components/MovieSlider.jsx";
 import TopRatedContainer from "../components/TopRatedContainer";
 import BestMovieContainer from "../components/BestMovieContainer";
 export default function HomePage() {
