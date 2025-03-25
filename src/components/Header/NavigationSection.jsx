@@ -1,26 +1,34 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
-const pages = ["Home", "List", "Custom Page", "About Us"];
+const pages = [
+  { name: "Home", path: "/" },
+  { name: "List", path: "/list" },
+  { name: "Custom Page", path: "/custom" },
+  { name: "About Us", path: "/about" },
+];
 
 export default function NavigationSection() {
   return (
     <Box
       sx={{
         flexGrow: 1,
-        display: { xs: "none", md: "flex", justifyContent: "center" },
+        display: { xs: "none", md: "flex" },
+        justifyContent: "center",
       }}
     >
       {pages.map((page) => (
         <Button
-          key={page}
+          key={page.name}
           sx={{
             my: 2,
             color: "white",
-            display: "block",
           }}
+          component={Link}
+          to={page.path}
         >
-          {page}
+          {page.name}
         </Button>
       ))}
     </Box>
