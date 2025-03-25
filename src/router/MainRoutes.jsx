@@ -4,7 +4,7 @@ import LoadingSpinner from "../components/LoadingSpinner.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const MoviesPage = lazy(() => import("../pages/MoviesPage"));
-const CustomPage = lazy(() => import("../pages/CustomPage"));
+const SmartSearch = lazy(() => import("../pages/SmartSearchPage.jsx"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
 const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -17,7 +17,7 @@ export default function MainRoutes() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/list" element={<MoviesPage />} />
-        <Route path="/custom" element={<CustomPage />} />
+        <Route path="/smartsearch" element={<SmartSearch />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
