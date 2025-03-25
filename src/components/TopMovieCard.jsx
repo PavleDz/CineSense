@@ -1,35 +1,63 @@
-import "../styles/TopMovieCard.css";
 import StarIcon from "@mui/icons-material/Star";
+import {
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Box,
+} from "@mui/material";
 
 export default function MovieCard({ movie }) {
   return (
-    <>
-      <div className="movie-container">
-        <div className="img-container">
-          <img src="src\assets\scarface-friend-2__27832.jpg" />
-        </div>
-        <div className="rating">
-          <StarIcon sx={{ color: "yellow" }}></StarIcon>
-          <p className="description">
-            <strong className="text-lg">{movie.rating}</strong>
-          </p>
-        </div>
-        <div className="description-container">
-          <h3>
-            <strong>{movie.title}</strong>
-          </h3>
-          <p className="description">
-            <strong>Year:</strong> {movie.year}
-          </p>
-          <p className="description">
-            <strong>Genre: </strong>
-            {movie.genre}
-          </p>
-        </div>
-        <div className="button-container">
-          <button className="more-info-button">More info...</button>
-        </div>
-      </div>
-    </>
+    <Card
+      className="shadow-md rounded-xl transition-transform hover:scale-[1.02]"
+      sx={{
+        maxWidth: 300,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <CardMedia
+        component="img"
+        image="src/assets/scarface-friend-2__27832.jpg"
+        alt={movie.title}
+        sx={{ height: 360, objectFit: "cover" }}
+      />
+
+      <CardContent className="flex flex-col gap-2">
+        <Box className="flex items-center gap-1 text-yellow-400">
+          <StarIcon />
+          <Typography variant="body1" fontWeight={600}>
+            {movie.rating}
+          </Typography>
+        </Box>
+
+        <Typography variant="h6" className="font-semibold">
+          {movie.title}
+        </Typography>
+
+        <Typography variant="body2">
+          <strong>Year:</strong> {movie.year}
+        </Typography>
+        <Typography variant="body2">
+          <strong>Genre:</strong> {movie.genre}
+        </Typography>
+      </CardContent>
+
+      <Box className="px-4 pb-4">
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{
+            textTransform: "none",
+            borderRadius: 2,
+          }}
+        >
+          About
+        </Button>
+      </Box>
+    </Card>
   );
 }

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import MovieCard from "./TopMovieCard";
-import "../styles/TopRatedContainer.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { Button, Container, Grid2 } from "@mui/material";
+
 export default function TopRatedContainer() {
   const movies = [
     { id: 1, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
@@ -20,43 +21,64 @@ export default function TopRatedContainer() {
     { id: 13, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
   ];
 
-  const [displayedMovies, setDisplayedMovies] = useState(movies.slice(0, 6));
+  const [displayedMovies, setDisplayedMovies] = useState(movies.slice(0, 4));
   const [buttonState, setButtonState] = useState(true);
+
   const handleLoadMore = () => {
     const nextMovies = movies.slice(
       displayedMovies.length,
-      displayedMovies.length + 3
+      displayedMovies.length + 4
     );
-    if (displayedMovies.length + 3 >= movies.length) {
-      setButtonState(false);
-    }
     setDisplayedMovies((prevMovies) => [...prevMovies, ...nextMovies]);
+    if (displayedMovies.length + 3 >= movies.length) setButtonState(false);
   };
 
   const handleHideAll = () => {
-    const initMovies = movies.slice(0, 6);
-    setDisplayedMovies(initMovies);
+    setDisplayedMovies(movies.slice(0, 4));
     setButtonState(true);
   };
 
   return (
-    <>
-      <div className="top-rated-container">
+    <Container maxWidth="lg" className="py-12">
+      <Grid2 container spacing={3} justifyContent="center">
         {displayedMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <Grid2 item xs={12} sm={6} md={4} lg={3} key={movie.id}>
+            <MovieCard movie={movie} />
+          </Grid2>
         ))}
-      </div>
-      <div className="button-container">
+      </Grid2>
+
+      <div className="flex justify-center mt-10">
         {buttonState ? (
-          <button className="load-more-button" onClick={handleLoadMore}>
-            LOAD MORE <ArrowDropDownIcon></ArrowDropDownIcon>
-          </button>
+          <Button
+            variant="contained"
+            onClick={handleLoadMore}
+            endIcon={<ArrowDropDownIcon />}
+            sx={{
+              textTransform: "none",
+              borderRadius: 2,
+              px: 4,
+              py: 1.5,
+            }}
+          >
+            Load More
+          </Button>
         ) : (
-          <button className="load-more-button" onClick={handleHideAll}>
-            HIDE ALL <ArrowDropUpIcon></ArrowDropUpIcon>
-          </button>
+          <Button
+            variant="contained"
+            onClick={handleHideAll}
+            endIcon={<ArrowDropUpIcon />}
+            sx={{
+              textTransform: "none",
+              borderRadius: 2,
+              px: 4,
+              py: 1.5,
+            }}
+          >
+            Hide All
+          </Button>
         )}
       </div>
-    </>
+    </Container>
   );
 }

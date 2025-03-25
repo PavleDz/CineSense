@@ -1,5 +1,5 @@
-import "../styles/BestMovieContainer.css";
-import BestMovieCard from "./bestMovieCard";
+import BestMovieCard from "./BestMovieCard";
+
 export default function BestMovieContainer() {
   const movies = [
     { id: 1, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
@@ -16,17 +16,14 @@ export default function BestMovieContainer() {
     { id: 12, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
     { id: 13, title: "The Scarface", rating: 9.5, genre: "Action", year: 1987 },
   ];
-  console.log(movies);
 
-  const bestMovies = movies.slice(0, 2);
+  const bestMovies = movies.slice(0, 3);
 
   return (
-    <>
-      <div className="best-rated-container">
-        {bestMovies.map((movie) => (
-          <BestMovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
-    </>
+    <div className="flex flex-col gap-6 p-4">
+      {bestMovies.map((movie) => (
+        <BestMovieCard key={movie.id} movie={movie} />
+      ))}
+    </div>
   );
 }

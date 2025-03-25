@@ -1,44 +1,39 @@
-// import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "./MovieCard";
-
-const responsive = {
-  superLargeDesktop: {
-    // screens >= 3000px
-    breakpoint: { max: 4000, min: 3000 },
-    items: 4,
-    slidesToSlide: 4,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1055 },
-    items: 3,
-    slidesToSlide: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1055, min: 464 },
-    items: 2,
-    slidesToSlide: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1,
-  },
-};
+import { IconButton } from "@mui/material";
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 
 export default function MovieSlider({ movies }) {
   return (
-    <div className="py-8 px-4">
+    <section className="w-full px-4 md:px-8 py-10">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+        Featured Movies
+      </h2>
+
       <Carousel
-        responsive={responsive}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={3000}
-        arrows={true}
-        keyBoardControl={true}
-        centerMode={true}
-        tabIndex={0}
+        infinite
+        autoPlay
+        autoPlaySpeed={4000}
+        arrows
+        keyBoardControl
+        showDots={false}
+        itemClass="px-2"
+        containerClass="pb-4"
+        responsive={{
+          desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 5,
+          },
+          tablet: {
+            breakpoint: { max: 1024, min: 640 },
+            items: 3,
+          },
+          mobile: {
+            breakpoint: { max: 640, min: 0 },
+            items: 1,
+          },
+        }}
       >
         {movies.map((movie, index) => (
           <MovieCard
@@ -49,6 +44,6 @@ export default function MovieSlider({ movies }) {
           />
         ))}
       </Carousel>
-    </div>
+    </section>
   );
 }

@@ -1,21 +1,30 @@
-import React from "react";
+import Button from "@mui/material/Button";
 
 export default function MovieCard({ title, posterUrl, movieLink }) {
   return (
-    <div className="relative max-w-[16rem] h-[30rem] rounded-lg overflow-hidden shadow-lg group">
+    <div className="relative w-full max-w-xs h-[30rem] rounded-xl overflow-hidden shadow-md group">
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
         style={{ backgroundImage: `url(${posterUrl})` }}
-      ></div>
-      <div className="absolute inset-0 bg-black opacity-40 group-hover:opacity-50 transition-opacity"></div>
-      <div className="relative z-10 p-6 flex flex-col justify-between h-full">
-        <h2 className="text-white text-2xl font-bold">{title}</h2>
-        <a
+      />
+
+      <div className="absolute inset-0 bg-opacity-50 group-hover:bg-opacity-60 transition-opacity" />
+
+      <div className="relative z-10 h-full flex flex-col justify-between p-5">
+        <h2 className="text-xl font-semibold leading-tight">{title}</h2>
+
+        <Button
+          variant="contained"
+          fullWidth
           href={movieLink}
-          className="mt-auto py-3 px-6 bg-blue-500 text-white text-center rounded-md shadow-lg hover:bg-blue-700 transition duration-300"
+          sx={{
+            mt: "auto",
+            textTransform: "none",
+            borderRadius: "0.5rem",
+          }}
         >
           Read More
-        </a>
+        </Button>
       </div>
     </div>
   );
