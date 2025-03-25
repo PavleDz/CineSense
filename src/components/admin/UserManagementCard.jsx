@@ -1,13 +1,12 @@
-import React from "react";
 import { Card, CardContent, Typography, Box, IconButton } from "@mui/material";
 import { Delete, Block } from "@mui/icons-material";
 
-//dummy
+// dummy
 const users = [
   { id: 1, email: "pavle@outlook.com", blocked: false },
   { id: 2, email: "dejan@gmail.com", blocked: true },
   { id: 3, email: "nikola@gmail.com", blocked: true },
-  { id: 3, email: "andrija@gmail.com", blocked: true },
+  { id: 4, email: "andrija@gmail.com", blocked: true },
 ];
 
 const UserManagementCard = () => {
@@ -27,7 +26,7 @@ const UserManagementCard = () => {
               <IconButton color="error">
                 <Delete />
               </IconButton>
-              <IconButton color={user.blocked ? "default" : "warning"}>
+              <IconButton color={user.blocked ? "error" : "default"}>
                 <Block />
               </IconButton>
             </Box>
