@@ -94,7 +94,7 @@ const SmartSearch = () => {
           searched ? "md:w-1/3 sticky top-4" : "w-full max-w-lg"
         }`}
       >
-        <Typography variant="h4" className="mb-4 text-center">
+        <Typography variant="h4" className="mb-4 pb-4 text-center">
           Smart Search
         </Typography>
         <MovieSearchForm onSearch={handleSearch} />
