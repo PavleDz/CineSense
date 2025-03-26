@@ -6,9 +6,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import MovieDetailsModal from "./MovieDetailsModal";
+import MovieDetailsModal from "../MovieDetailsModal";
 
-export default function SmallMovieCard({ movie }) {
+export default function ItemCard({ movie }) {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => setOpenModal(true);
@@ -24,7 +24,7 @@ export default function SmallMovieCard({ movie }) {
         onClick={handleOpenModal}
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           boxShadow: 3,
           borderRadius: 2,
           overflow: "hidden",
@@ -32,15 +32,13 @@ export default function SmallMovieCard({ movie }) {
           mx: "auto",
           p: 2,
           height: "100%",
-          width: "100%",
-          minWidth: "250px",
         }}
       >
         <CardMedia
           component="img"
           sx={{
-            width: "30%",
-            // height: "40%",
+            width: "100%",
+            height: 250,
             objectFit: "cover",
             borderRadius: 2,
           }}
@@ -64,7 +62,7 @@ export default function SmallMovieCard({ movie }) {
           </Box>
 
           <Box mt={1}>
-            <Typography component="h5" fontWeight="bold">
+            <Typography component="h5" fontWeight="bold" noWrap>
               {movie.title}
             </Typography>
             <Typography variant="body1">
