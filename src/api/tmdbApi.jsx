@@ -10,26 +10,35 @@ const tmdbClient = axios.create({
   },
 });
 
-// Now Playing (movies)
 export async function getNowPlayingMovies() {
   const response = await tmdbClient.get("/movie/now_playing");
   return response.data;
 }
 
-// Trending: pass 'movie' or 'tv'
 export async function getTrending(mediaType = "movie") {
   const response = await tmdbClient.get(`/trending/${mediaType}/week`);
   return response.data;
 }
 
-// Top Rated: pass 'movie' or 'tv'
 export async function getTopRated(mediaType = "movie") {
   const response = await tmdbClient.get(`/${mediaType}/top_rated`);
   return response.data;
 }
 
-// Popular: pass 'movie' or 'tv'
 export async function getPopular(mediaType = "movie") {
   const response = await tmdbClient.get(`/${mediaType}/popular`);
   return response.data;
+}
+
+// get genre lists
+export async function getMovieGenres() {
+  const response = await tmdbClient.get("/genre/movie/list");
+  // returns { genres: [ {id, name}, {id, name}, ... ] }
+  return response.data.genres;
+}
+
+export async function getTvGenres() {
+  const response = await tmdbClient.get("/genre/tv/list");
+  // returns { genres: [ {id, name}, {id, name}, ... ] }
+  return response.data.genres;
 }

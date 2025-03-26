@@ -33,7 +33,7 @@ export default function MovieCard({ movie }) {
         <Box className="flex items-center gap-1 text-yellow-400">
           <StarIcon />
           <Typography variant="body1" fontWeight={600}>
-            {movie.rating.toFixed(1)}
+            {movie.rating}
           </Typography>
         </Box>
 

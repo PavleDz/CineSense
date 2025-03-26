@@ -19,7 +19,7 @@ export default function SmallMovieCard({ movie }) {
       <div className="flex flex-col justify-between w-full md:w-2/3">
         <div className="flex items-center gap-1 text-yellow-400">
           <StarIcon />
-          <p className="text-lg font-semibold">{movie.rating.toFixed(1)}</p>
+          <p className="text-lg font-semibold">{movie.rating}</p>
         </div>
 
         <div className="mt-2">

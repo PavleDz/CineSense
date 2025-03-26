@@ -3,7 +3,12 @@ import { Container, Button, Grid } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import MovieCard from "./MovieCard";
-import { getTopRated, getPopular } from "../api/tmdbApi";
+import {
+  getTopRated,
+  getPopular,
+  getMovieGenres,
+  getTvGenres,
+} from "../api/tmdbApi";
 
 export default function MovieCardContainer({ category = "top_rated" }) {
   const [mediaType, setMediaType] = useState("movie");
@@ -14,6 +19,18 @@ export default function MovieCardContainer({ category = "top_rated" }) {
   useEffect(() => {
     async function fetchData() {
       try {
+        let genreList = [];
+        if (mediaType === "movie") {
+          genreList = await getMovieGenres();
+        } else {
+          genreList = await getTvGenres();
+        }
+
+        const genreMap = {};
+        genreList.forEach((g) => {
+          genreMap[g.id] = g.name;
+        });
+
         let data;
         if (category === "top_rated") {
           data = await getTopRated(mediaType);
@@ -24,18 +41,23 @@ export default function MovieCardContainer({ category = "top_rated" }) {
         if (data && data.results) {
           const mapped = data.results.map((item) => {
             const title =
-              mediaType === "movie" ? item.title : item.name || "N/A";
+              mediaType === "movie" ? item.title : item.name || "Untitled";
             const releaseDate =
               mediaType === "movie" ? item.release_date : item.first_air_date;
             const year = releaseDate ? releaseDate.slice(0, 4) : "N/A";
+
+            const genreNames = item.genre_ids
+              .map((id) => genreMap[id])
+              .filter(Boolean)
+              .join(", ");
 
             return {
               id: item.id,
               title,
               posterPath: item.poster_path,
-              rating: item.vote_average,
+              rating: item.vote_average?.toFixed(1),
               year,
-              genre: "N/A",
+              genre: genreNames || "N/A",
             };
           });
 
@@ -47,6 +69,7 @@ export default function MovieCardContainer({ category = "top_rated" }) {
         console.error("Error fetching data:", err);
       }
     }
+
     fetchData();
   }, [category, mediaType]);
 
@@ -82,9 +105,9 @@ export default function MovieCardContainer({ category = "top_rated" }) {
       </Button>
 
       <Grid container spacing={3} justifyContent="center" className="mt-4">
-        {displayedItems.map((item) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-            <MovieCard movie={item} />
+        {displayedItems.map((movie) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
+            <MovieCard movie={movie} />
           </Grid>
         ))}
       </Grid>

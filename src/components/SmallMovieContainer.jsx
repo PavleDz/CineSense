@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import SmallMovieCard from "./SmallMovieCard";
-import { getTrending } from "../api/tmdbApi";
+import { getTrending, getMovieGenres, getTvGenres } from "../api/tmdbApi";
 import { Button } from "@mui/material";
 
 export default function SmallMovieContainer() {
@@ -10,8 +10,20 @@ export default function SmallMovieContainer() {
   useEffect(() => {
     async function fetchTrending() {
       try {
+        let genreList = [];
+        if (mediaType === "movie") {
+          genreList = await getMovieGenres();
+        } else {
+          genreList = await getTvGenres();
+        }
+
+        const genreMap = {};
+        genreList.forEach((g) => {
+          genreMap[g.id] = g.name;
+        });
+
         const data = await getTrending(mediaType);
-        // Map to minimal fields
+
         const mapped = data.results.map((item) => {
           const title =
             mediaType === "movie" ? item.title : item.name || "Untitled";
@@ -19,28 +31,35 @@ export default function SmallMovieContainer() {
             mediaType === "movie" ? item.release_date : item.first_air_date;
           const year = releaseDate ? releaseDate.slice(0, 4) : "N/A";
 
+          const genreNames = item.genre_ids
+            .map((id) => genreMap[id])
+            .filter(Boolean)
+            .join(", ");
+
           return {
             id: item.id,
             title,
             posterPath: item.poster_path,
-            rating: item.vote_average,
+            rating: item.vote_average?.toFixed(1),
             year,
-            genre: "N/A",
+            genre: genreNames || "N/A",
           };
         });
+
         setTrendingItems(mapped);
       } catch (error) {
         console.error("Error fetching trending data:", error);
       }
     }
+
     fetchTrending();
   }, [mediaType]);
+
+  const displayedItems = trendingItems.slice(0, 3);
 
   const handleSwapMediaType = () => {
     setMediaType((prev) => (prev === "movie" ? "tv" : "movie"));
   };
-
-  const displayedItems = trendingItems.slice(0, 3);
 
   return (
     <div className="flex flex-col gap-6 p-4">
