@@ -1,31 +1,67 @@
-import Button from "@mui/material/Button";
+import StarIcon from "@mui/icons-material/Star";
+import {
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Box,
+} from "@mui/material";
 
-export default function MovieCard({ title, posterUrl, movieLink }) {
+export default function MovieCard({ movie }) {
+  const posterUrl = movie.posterPath
+    ? `https://image.tmdb.org/t/p/w500${movie.posterPath}`
+    : "https://via.placeholder.com/400x600";
+
   return (
-    <div className="relative w-full max-w-xs h-[30rem] rounded-xl overflow-hidden shadow-md group">
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-        style={{ backgroundImage: `url(${posterUrl})` }}
+    <Card
+      className="shadow-md rounded-xl transition-transform hover:scale-[1.02]"
+      sx={{
+        maxWidth: 300,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={posterUrl}
+        alt={movie.title}
+        sx={{ height: 360, objectFit: "cover" }}
       />
+      <CardContent className="flex flex-col gap-2">
+        <Box className="flex items-center gap-1 text-yellow-400">
+          <StarIcon />
+          <Typography variant="body1" fontWeight={600}>
+            {movie.rating.toFixed(1)}
+          </Typography>
+        </Box>
 
-      <div className="absolute inset-0 bg-opacity-50 group-hover:bg-opacity-60 transition-opacity" />
+        <Typography variant="h6" className="font-semibold">
+          {movie.title}
+        </Typography>
 
-      <div className="relative z-10 h-full flex flex-col justify-between p-5">
-        <h2 className="text-xl font-semibold leading-tight">{title}</h2>
+        <Typography variant="body2">
+          <strong>Year:</strong> {movie.year}
+        </Typography>
+        <Typography variant="body2">
+          <strong>Genre:</strong> {movie.genre}
+        </Typography>
+      </CardContent>
 
+      <Box className="px-4 pb-4">
         <Button
           variant="contained"
           fullWidth
-          href={movieLink}
           sx={{
-            mt: "auto",
             textTransform: "none",
-            borderRadius: "0.5rem",
+            borderRadius: 2,
           }}
+          onClick={() => console.log("Selected item ID:", movie.id)}
         >
-          Read More
+          About
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Card>
   );
 }

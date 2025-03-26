@@ -1,12 +1,16 @@
 import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
 
-export default function BestMovieCard({ movie }) {
+export default function SmallMovieCard({ movie }) {
+  const posterUrl = movie.posterPath
+    ? `https://image.tmdb.org/t/p/w500${movie.posterPath}`
+    : "https://via.placeholder.com/400x600";
+
   return (
     <div className="flex flex-col md:flex-row shadow-md rounded-2xl overflow-hidden p-4 gap-4 max-w-4xl mx-auto">
       <div className="flex-shrink-0 w-full md:w-1/3">
         <img
-          src="src/assets/scarface-friend-2__27832.jpg"
+          src={posterUrl}
           alt={movie.title}
           className="object-cover h-full w-full rounded-xl"
         />
@@ -15,7 +19,7 @@ export default function BestMovieCard({ movie }) {
       <div className="flex flex-col justify-between w-full md:w-2/3">
         <div className="flex items-center gap-1 text-yellow-400">
           <StarIcon />
-          <p className="text-lg font-semibold">{movie.rating}</p>
+          <p className="text-lg font-semibold">{movie.rating.toFixed(1)}</p>
         </div>
 
         <div className="mt-2">
@@ -29,7 +33,13 @@ export default function BestMovieCard({ movie }) {
         </div>
 
         <div className="mt-4">
-          <Button variant="contained" color="primary" size="small" fullWidth>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            fullWidth
+            onClick={() => console.log("Selected trending item ID:", movie.id)}
+          >
             About
           </Button>
         </div>

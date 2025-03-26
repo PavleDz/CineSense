@@ -1,14 +1,12 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import MovieCard from "./MovieCard";
-import { IconButton } from "@mui/material";
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import SliderMovieCard from "./SliderMovieCard";
 
-export default function MovieSlider({ movies }) {
+export default function MovieSlider({ movies = [] }) {
   return (
     <section className="w-full px-4 md:px-8 py-10">
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
-        Featured Movies
+        Now Playing
       </h2>
 
       <Carousel
@@ -35,12 +33,13 @@ export default function MovieSlider({ movies }) {
           },
         }}
       >
-        {movies.map((movie, index) => (
-          <MovieCard
-            key={index}
+        {movies.map((movie) => (
+          <SliderMovieCard
+            key={movie.id}
+            id={movie.id}
             title={movie.title}
-            posterUrl={movie.posterUrl}
-            movieLink={movie.movieLink}
+            posterPath={movie.posterPath}
+            rating={movie.rating}
           />
         ))}
       </Carousel>
