@@ -53,7 +53,7 @@ export default function SmartSearch() {
     >
       {!searched && (
         <Box sx={{ width: "100%", maxWidth: 400, textAlign: "center" }}>
-          <Typography variant="h4" sx={{ mb: 3, fontWeight: "bold" }}>
+          <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: "bold" }}>
             Smart Search
           </Typography>
           <MovieSearchForm onSearch={handleSearch} />
