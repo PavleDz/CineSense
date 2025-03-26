@@ -21,6 +21,7 @@ export default function SmallMovieCard({ movie }) {
   return (
     <>
       <Card
+        onClick={handleOpenModal}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -73,13 +74,7 @@ export default function SmallMovieCard({ movie }) {
           </Box>
 
           <Box mt={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              size="small"
-              onClick={handleOpenModal}
-            >
+            <Button variant="contained" color="primary" fullWidth size="small">
               About
             </Button>
           </Box>
